@@ -1,4 +1,4 @@
-import options from "./utils";
+import { options } from "./utils";
 
 class Api {
   constructor(config) {
@@ -15,9 +15,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this.url}/users/me`, { headers: this.headers }).then(
-      this._checkApiRequest
-    );
+    return fetch(`${this.url}/users/me`, { headers: this.headers }).then(this._checkApiRequest);
   }
 
   getInitialCards() {
@@ -34,10 +32,7 @@ class Api {
     return fetch(`${this.url}/users/me`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
+      body: JSON.stringify({ name, about }),
     }).then(this._checkApiRequest);
   }
 
@@ -45,9 +40,7 @@ class Api {
     return fetch(`${this.url}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify({
-        avatar: avatar,
-      }),
+      body: JSON.stringify({ avatar }),
     }).then(this._checkApiRequest);
   }
 
@@ -55,10 +48,7 @@ class Api {
     return fetch(`${this.url}/cards`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
+      body: JSON.stringify({ name, link }),
     }).then(this._checkApiRequest);
   }
 

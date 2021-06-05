@@ -5,6 +5,10 @@
 @import url(./blocks/container/container.css);
 @import url(./blocks//header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__action-container/header__action-container.css);
+@import url(./blocks/header/__action/header__action.css);
+@import url(./blocks/header/__action/_logout/header__action_logout.css);
+@import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/content/content.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar-container/profile__avatar-container.css);
@@ -34,6 +38,7 @@
 @import url(./blocks/popup/_type/popup_type_view.css);
 @import url(./blocks/popup/_type/popup_type_confirm.css);
 @import url(./blocks/popup/_type/popup_type_avatar.css);
+@import url(./blocks/popup/_type/popup_type_info.css);
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__title/popup__title.css);
@@ -41,6 +46,9 @@
 @import url(./blocks/popup/__form/_type/popup__form_type_confirm.css);
 @import url(./blocks/popup/__form-set/popup__form-set.css);
 @import url(./blocks/popup/__input/popup__input.css);
+@import url(./blocks/popup/__register-success/popup__register-success.css);
+@import url(./blocks/popup/__register-fail/popup__register-fail.css);
+@import url(./blocks/popup/__register-text/popup__register-text.css);
 @import url(./blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(./blocks/popup/__input/_type/popup__input_type_occupation.css);
 @import url(./blocks/popup/__input/_type/popup__input_type_title.css);
@@ -58,3 +66,13 @@
 @import url(./blocks/popup/__image/popup__image.css);
 @import url(./blocks/popup/__title/_type/popup__title_type_view.css);
 @import url(./blocks/popup/__close-button/popup__close-button.css);
+@import url(./blocks/sign-up-in/sign-up-in.css);
+@import url(./blocks/sign-up-in/__container/sign-up-in__container.css);
+@import url(./blocks/sign-up-in/__form-set/sign-up-in__form-set.css);
+@import url(./blocks/sign-up-in/__form/sign-up-in__form.css);
+@import url(./blocks/sign-up-in/__title/sign-up-in__title.css);
+@import url(./blocks/sign-up-in/__button/sign-up-in__button.css);
+@import url(./blocks/sign-up-in/__caption/sign-up-in__caption.css);
+@import url(./blocks/sign-up-in/__input/sign-up-in__input.css);
+@import url(./blocks/sign-up-in/__input/_type/sign-up-in__input_type_email.css);
+@import url(./blocks/sign-up-in/__input/_type/sign-up-in__input_type_password.css);
