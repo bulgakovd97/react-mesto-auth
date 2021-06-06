@@ -7,7 +7,7 @@ class Auth {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
+    return res.ok ? res.json() : Promise.reject(res);
   }
 
   register({ password, email }) {

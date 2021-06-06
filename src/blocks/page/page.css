@@ -10,5 +10,6 @@
     -moz-text-size-adjust: 100%;
     max-width: 1280px;
     min-width: 320px;
+    min-height: 100vh;
     margin: 0 auto;
 }

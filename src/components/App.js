@@ -15,8 +15,7 @@ import Register from "./Register";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import { auth } from "../utils/auth";
-import InfoTooltipSuccess from "./InfoToolTipSuccess";
-import InfoTooltipFail from "./InfoToolTipFail";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -27,9 +26,7 @@ function App() {
 
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
 
-  const [isInfoTooltipSuccessOpen, setIsInfoTooltipSuccessOpen] = React.useState(false);
-
-  const [isInfoTooltipFailOpen, setIsInfoTooltipFailOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState(null);
 
@@ -42,6 +39,8 @@ function App() {
   const [userInfo, setUserInfo] = React.useState({ email: "" });
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  const [infoMessage, setInfoMessage] = React.useState({ image: "", text: "" });
 
   const history = useHistory();
 
@@ -84,8 +83,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
-    setIsInfoTooltipSuccessOpen(false);
-    setIsInfoTooltipFailOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null);
     setDeletedCard(null);
   }
@@ -102,27 +100,13 @@ function App() {
 
   function handleEscUp(evt) {
     if (evt.key === "Escape") {
-      setIsAddPlacePopupOpen(false);
-      setIsEditProfilePopupOpen(false);
-      setIsEditAvatarPopupOpen(false);
-      setIsDeleteCardPopupOpen(false);
-      setIsInfoTooltipSuccessOpen(false);
-      setIsInfoTooltipFailOpen(false);
-      setSelectedCard(null);
-      setDeletedCard(null);
+      closeAllPopups();
     }
   }
 
   function handleOverlayClick(evt) {
     if (evt.target.classList.contains("popup_opened")) {
-      setIsAddPlacePopupOpen(false);
-      setIsEditProfilePopupOpen(false);
-      setIsEditAvatarPopupOpen(false);
-      setIsDeleteCardPopupOpen(false);
-      setIsInfoTooltipSuccessOpen(false);
-      setIsInfoTooltipFailOpen(false);
-      setSelectedCard(null);
-      setDeletedCard(null);
+      closeAllPopups();
     }
   }
 
@@ -185,10 +169,14 @@ function App() {
     return auth
       .register(data)
       .then(() => {
-        setIsInfoTooltipSuccessOpen(true);
+        setIsInfoTooltipOpen(true);
+        setInfoMessage({ image: "success", text: "Вы успешно зарегистрировались!" });
         history.push("/sign-in");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setInfoMessage({ image: "fail", text: `Ошибка ${err.status} - некорректно заполнено одно из полей` });
+      });
   }
 
   function login({ password, email }) {
@@ -204,9 +192,9 @@ function App() {
           return;
         }
       })
-      .catch((err) => {
-        console.log(err);
-        setIsInfoTooltipFailOpen(true);
+      .catch(() => {
+        setIsInfoTooltipOpen(true);
+        setInfoMessage({ image: "fail", text: "Что-то пошло не так! Попробуйте ещё раз." });
       });
   }
 
@@ -222,9 +210,14 @@ function App() {
       .then(({ data }) => {
         return data;
       })
-      .then(({ _id, email }) => {
+      .then(({ email }) => {
         setUserInfo({ email });
         setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setInfoMessage({ image: "fail", text: `Ошибка ${err.status} - переданный токен некорректен` });
+        logout();
       });
   }
 
@@ -297,9 +290,10 @@ function App() {
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-            <InfoTooltipSuccess isOpen={isInfoTooltipSuccessOpen} onClose={closeAllPopups} />
-
-            <InfoTooltipFail isOpen={isInfoTooltipFailOpen} onClose={closeAllPopups} />
+            <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups}>
+              <div className={`popup__register-${infoMessage.image}`}></div>
+              <p className="popup__register-text">{infoMessage.text}</p>
+            </InfoTooltip>
           </div>
         </div>
       </CardsContext.Provider>
