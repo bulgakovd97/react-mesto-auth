@@ -290,10 +290,7 @@ function App() {
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-            <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups}>
-              <div className={`popup__register-${infoMessage.image}`}></div>
-              <p className="popup__register-text">{infoMessage.text}</p>
-            </InfoTooltip>
+            <InfoTooltip isOpen={isInfoTooltipOpen} infoMessage={infoMessage} onClose={closeAllPopups} />
           </div>
         </div>
       </CardsContext.Provider>
