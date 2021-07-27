@@ -52,4 +52,4 @@
 - добавить валидацию форм на React;
 - переписать индикаторы загрузки запросов в декларативном стиле.
 
-[Ссылка](https://bulgakovd97.github.io/mesto/index.html) на проект
+[Ссылка](https://bulgakovd97.github.io/react-mesto-auth/) на проект
